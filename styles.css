@@ -294,17 +294,37 @@ rgba(255,255,255,.06);
 overflow:hidden;
 
 box-shadow:
-inset 0 0 14px rgba(0,0,0,.45);
+inset 0 0 14px rgba(0,0,0,.45)
 
 }
 
-.xp-bar-fill {
-  height: 100%;
-  width: 0%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--primary), var(--glow));
-  box-shadow: var(--shadow-glow);
-  transition: width 0.8s var(--ease);
+.xp-bar-fill{
+
+height:100%;
+
+width:0%;
+
+border-radius:999px;
+
+background:
+linear-gradient(
+90deg,
+#7C4DFF,
+#A970FF,
+#59F2C8
+);
+
+background-size:300%;
+
+animation:
+flow 6s linear infinite;
+
+box-shadow:
+0 0 20px rgba(169,112,255,.35);
+
+transition:
+width .8s var(--ease);
+
 }
 
 /* ---------- Quick stats row ---------- */
