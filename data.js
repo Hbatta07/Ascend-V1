@@ -87,3 +87,27 @@ const NATURE_CATALOG = [
 ];
 
 const XP_PER_LEVEL = 1000;
+
+/* ============================================================
+   LIVING WORLD — level-based progression (additive)
+   Does NOT replace NATURE_CATALOG, which still drives the
+   "Nature Lover" achievement via natureUnlocked/XP thresholds.
+   This is a separate, cumulative scene layer read by
+   renderNature() and keyed purely off state.level, so no new
+   persisted unlock-tracking is needed.
+   ============================================================ */
+
+const WORLD_STAGES = [
+  { level: 1,   elements: [{ icon: "🌱", name: "Sprout" }] },
+  { level: 3,   elements: [{ icon: "🌿", name: "Grass" }] },
+  { level: 5,   elements: [{ icon: "🌸", name: "Flowers" }] },
+  { level: 8,   elements: [{ icon: "🌳", name: "Trees" }] },
+  { level: 12,  elements: [{ icon: "🦋", name: "Butterflies" }] },
+  { level: 18,  elements: [{ icon: "🐇", name: "Rabbit" }, { icon: "🦉", name: "Owl", night: true }] },
+  { level: 25,  elements: [{ icon: "🦌", name: "Deer" }] },
+  { level: 35,  elements: [{ icon: "🌊", name: "River" }] },
+  { level: 45,  elements: [{ icon: "🦊", name: "Fox" }] },
+  { level: 60,  elements: [{ icon: "⛰️", name: "Mountains" }] },
+  { level: 80,  elements: [{ icon: "🌲", name: "Ancient Forest" }] },
+  { level: 100, elements: [{ icon: "🌟", name: "Spirit Tree" }] },
+];
