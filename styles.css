@@ -314,7 +314,7 @@ linear-gradient(
 #59F2C8
 );
 
-background-size:300%;
+background-size:300% 100%;
 
 animation:
 flow 6s linear infinite;
