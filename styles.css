@@ -71,7 +71,7 @@ button {
 }
 
 .app {
-  max-width: 480px;
+  max-width: 430px;
   margin: 0 auto;
   padding: 24px 20px 100px;
 }
@@ -209,7 +209,8 @@ pointer-events:none;
 .card:hover{
 
 transform:
-translateY(-3px);
+translateY(-3px)
+scale(1.01);
 
 border-color:
 rgba(169,112,255,.22);
