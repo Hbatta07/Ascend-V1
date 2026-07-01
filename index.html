@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Ascend</title>
+  <meta name="description" content="Ascend — a personal operating system for daily growth." />
+  <meta name="theme-color" content="#09090B" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand"><span class="brand-mark">▲</span> ASCEND</div>
+      <div class="datetime">
+        <div id="today-date">—</div>
+        <div id="today-time">—</div>
+      </div>
+    </header>
+
+    <section class="greeting-block">
+      <h1 id="greeting">—</h1>
+      <p id="motivation">—</p>
+    </section>
+
+    <!-- XP / Level -->
+    <section class="card xp-card">
+      <div class="xp-top-row">
+        <div class="level-badge">
+          <span class="level-pill">Lv <span id="level-value">1</span></span>
+        </div>
+        <span class="xp-label" id="xp-label">0 / 1000 XP</span>
+      </div>
+      <div class="xp-bar-track">
+        <div class="xp-bar-fill" id="xp-bar-fill"></div>
+      </div>
+    </section>
+
+    <!-- Quick stats -->
+    <section class="quick-stats">
+      <div class="card stat-card">
+        <span class="stat-value" id="stat-total-missions">0</span>
+        <span class="stat-label">Missions</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-value" id="stat-lifetime-xp">0</span>
+        <span class="stat-label">Lifetime XP</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-value" id="stat-achievements">0/0</span>
+        <span class="stat-label">Achievements</span>
+      </div>
+    </section>
+
+    <!-- Streak -->
+    <section class="card streak-card">
+      <div class="streak-block">
+        <span class="streak-value" id="streak-current">0</span>
+        <span class="streak-label">Current streak</span>
+      </div>
+      <div class="streak-divider"></div>
+      <div class="streak-block">
+        <span class="streak-value" id="streak-longest">0</span>
+        <span class="streak-label">Longest streak</span>
+      </div>
+    </section>
+
+    <!-- Missions -->
+    <div class="section-header">
+      <h2>Today's Missions</h2>
+      <button class="icon-btn" id="add-mission-btn" aria-label="Add mission">+</button>
+    </div>
+    <div id="mission-list"></div>
+
+    <!-- Nature -->
+    <div class="section-header">
+      <h2>Your World</h2>
+    </div>
+    <section class="card">
+      <div class="nature-grid" id="nature-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <!-- Level up celebration -->
+  <div id="level-up-overlay">
+    <div class="level-up-content">
+      <div class="badge">🎉</div>
+      <h2>Level <span id="level-up-value">2</span></h2>
+      <p>Your world grows with you.</p>
+    </div>
+  </div>
+
+  <!-- Add mission modal -->
+  <div class="modal-backdrop" id="add-mission-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3>New Mission</h3>
+        <button class="icon-btn" id="add-mission-close" aria-label="Close">✕</button>
+      </div>
+      <form id="add-mission-form">
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label for="m-icon">Icon (emoji)</label>
+            <input id="m-icon" name="icon" type="text" maxlength="4" placeholder="🌟" />
+          </div>
+          <div class="form-row">
+            <label for="m-xp">XP</label>
+            <input id="m-xp" name="xp" type="number" min="5" max="500" value="30" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="m-title">Title</label>
+          <input id="m-title" name="title" type="text" placeholder="Meditate 10 minutes" required />
+        </div>
+        <div class="form-row">
+          <label for="m-description">Description</label>
+          <textarea id="m-description" name="description" placeholder="Why this matters"></textarea>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label for="m-difficulty">Difficulty</label>
+            <select id="m-difficulty" name="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="m-minutes">Minutes</label>
+            <input id="m-minutes" name="minutes" type="number" min="1" max="240" value="15" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="m-category">Category</label>
+          <select id="m-category" name="category">
+            <option value="health">Health</option>
+            <option value="mind">Mind</option>
+            <option value="craft">Craft</option>
+            <option value="general">General</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary">Add Mission</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
