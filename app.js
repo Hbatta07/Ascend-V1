@@ -330,100 +330,85 @@ function renderMissions() {
   });
 }
 
+/* Cumulative list of every world element unlocked at or below `level`. */
+function getWorldElements(level) {
+  const elements = [];
+  WORLD_STAGES.forEach((stage) => {
+    if (level >= stage.level) elements.push(...stage.elements);
+  });
+  return elements;
+}
+
+function isNightNow(date = new Date()) {
+  const h = date.getHours();
+  return h < 6 || h >= 19;
+}
+
+function renderWorldStars() {
+  let html = "";
+  for (let i = 1; i <= 6; i++) {
+    html += `<span class="world-star star-${i}">⭐</span>`;
+  }
+  return html;
+}
+
 function renderNature() {
-
   const container = document.getElementById("nature-grid");
+  container.innerHTML = "";
+  container.classList.add("world-scene");
 
-  const level = state.level;
+  const night = isNightNow();
+  container.classList.toggle("world-night", night);
+  container.classList.toggle("world-day", !night);
 
-  let world = "";
+  // Sky layer — sun/moon, stars at night, drifting clouds
+  const sky = document.createElement("div");
+  sky.className = "world-sky";
+  sky.innerHTML = `
+    <span class="world-celestial">${night ? "🌙" : "☀️"}</span>
+    ${night ? renderWorldStars() : ""}
+    <span class="world-cloud cloud-1">☁️</span>
+    <span class="world-cloud cloud-2">☁️</span>
+    <span class="world-cloud cloud-3">☁️</span>
+  `;
+  container.appendChild(sky);
 
-  if(level >= 1){
-    world += `
-    <div class="forest-row sky">
-      ☀️
-    </div>
+  // Ground layer — every element earned so far, cumulative by level
+  const ground = document.createElement("div");
+  ground.className = "world-ground";
+  const elements = getWorldElements(state.level);
 
-    <div class="forest-row">
-      🌱
-    </div>
-    `;
+  if (elements.length === 0) {
+    ground.innerHTML = `<div class="world-empty">Complete missions to awaken your world.</div>`;
+  } else {
+    elements.forEach((el) => {
+      if (el.night && !night) return; // nocturnal elements only appear after dark
+      if (el.day && night) return;
+      const item = document.createElement("span");
+      item.className = "world-element";
+      item.title = el.name;
+      item.textContent = el.icon;
+      ground.appendChild(item);
+    });
+  }
+  container.appendChild(ground);
+
+  // Falling leaves once the world has trees (level 8+)
+  if (state.level >= 8) {
+    const leaves = document.createElement("div");
+    leaves.className = "world-leaves";
+    leaves.innerHTML = `<span class="leaf leaf-1">🍃</span><span class="leaf leaf-2">🍃</span>`;
+    container.appendChild(leaves);
   }
 
-  if(level >= 3){
-    world += `
-    <div class="forest-row">
-      🌿 🌿 🌿
-    </div>
-    `;
-  }
-
-  if(level >= 5){
-    world += `
-    <div class="forest-row">
-      🌸 🌸 🍄
-    </div>
-    `;
-  }
-
-  if(level >= 8){
-    world += `
-    <div class="forest-row">
-      🌲 🌳 🌲
-    </div>
-    `;
-  }
-
-  if(level >= 12){
-    world += `
-    <div class="forest-row">
-      🦋
-    </div>
-    `;
-  }
-
-  if(level >= 18){
-    world += `
-    <div class="forest-row">
-      🐇
-    </div>
-    `;
-  }
-
-  if(level >= 25){
-    world += `
-    <div class="forest-row">
-      🦌
-    </div>
-    `;
-  }
-
-  if(level >= 35){
-    world += `
-    <div class="forest-row">
-      🌊 🌊 🌊
-    </div>
-    `;
-  }
-
-  if(level >= 45){
-    world += `
-    <div class="forest-row">
-      🦊
-    </div>
-    `;
-  }
-
-  if(level >= 60){
-    world += `
-    <div class="forest-row">
-      ⛰️ ⛰️
-    </div>
-    `;
-  }
-
-  container.innerHTML = world;
-
+  // Next-milestone hint keeps the "what should I do today" goal visible
+  const next = WORLD_STAGES.find((s) => s.level > state.level);
+  const hint = document.createElement("div");
+  hint.className = "world-hint";
+  hint.textContent = next
+    ? `Next: ${next.elements.map((e) => e.name).join(", ")} at Level ${next.level}`
+    : "Your world is fully awakened.";
+  container.appendChild(hint);
 }
 
 function renderAll() {
@@ -534,6 +519,7 @@ function init() {
     document.getElementById("today-time").textContent = new Date().toLocaleTimeString(undefined, {
       hour: "2-digit", minute: "2-digit",
     });
+    renderNature(); // keeps day/night + nocturnal elements in sync with real time
   }, 30000);
 
   document.getElementById("mission-list").addEventListener("click", handleMissionListClick);
