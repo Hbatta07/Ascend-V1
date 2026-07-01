@@ -4,43 +4,66 @@
    nature-inspired, subtle fantasy. Mobile-first, native-feeling.
    ============================================================ */
 
-:root {
-  --bg: #09090B;
-  --card: #16161D;
-  --primary: #7C4DFF;
-  --glow: #A970FF;
-  --success: #22C55E;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-  --text: #FFFFFF;
-  --text-secondary: #9CA3AF;
+:root{
+  --bg:#05060A;
+  --card:rgba(18,20,30,.62);
 
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 10px;
+  --primary:#7C4DFF;
+  --glow:#A970FF;
+  --accent:#59F2C8;
 
-  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 24px rgba(169, 112, 255, 0.35);
+  --success:#22C55E;
+  --warning:#F59E0B;
+  --danger:#EF4444;
 
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --text:#FFFFFF;
+  --text-secondary:#B5BDD1;
+
+  --radius-lg:28px;
+  --radius-md:18px;
+  --radius-sm:12px;
+
+  --shadow-card:0 20px 45px rgba(0,0,0,.45);
+  --shadow-glow:0 0 35px rgba(169,112,255,.22);
+
+  --ease:cubic-bezier(.22,1,.36,1);
 }
 
 * { box-sizing: border-box; }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  -webkit-font-smoothing: antialiased;
+html,body{
+  margin:0;
+  padding:0;
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
 }
 
-body {
-  min-height: 100vh;
+body{
+
+  min-height:100vh;
+
   background:
-    radial-gradient(ellipse at top, rgba(124, 77, 255, 0.12), transparent 60%),
-    var(--bg);
+
+  radial-gradient(circle at top,
+  rgba(124,77,255,.16),
+  transparent 35%),
+
+  radial-gradient(circle at bottom,
+  rgba(44,203,127,.08),
+  transparent 45%),
+
+  linear-gradient(
+  180deg,
+  #080911,
+  #05060A 65%,
+  #040507);
+
+  color:var(--text);
+
+  overflow-x:hidden;
+
+  position:relative;
+
 }
 
 button {
