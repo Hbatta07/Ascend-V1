@@ -331,16 +331,99 @@ function renderMissions() {
 }
 
 function renderNature() {
+
   const container = document.getElementById("nature-grid");
-  container.innerHTML = "";
-  NATURE_CATALOG.forEach((n) => {
-    const unlocked = state.natureUnlocked.includes(n.id);
-    const el = document.createElement("div");
-    el.className = "nature-item" + (unlocked ? " unlocked" : " locked");
-    el.title = unlocked ? `${n.name} — ${n.meaning}` : `Unlocks at ${n.xpThreshold} lifetime XP`;
-    el.innerHTML = `<span class="nature-icon">${unlocked ? n.icon : "🔒"}</span>`;
-    container.appendChild(el);
-  });
+
+  const level = state.level;
+
+  let world = "";
+
+  if(level >= 1){
+    world += `
+    <div class="forest-row sky">
+      ☀️
+    </div>
+
+    <div class="forest-row">
+      🌱
+    </div>
+    `;
+  }
+
+  if(level >= 3){
+    world += `
+    <div class="forest-row">
+      🌿 🌿 🌿
+    </div>
+    `;
+  }
+
+  if(level >= 5){
+    world += `
+    <div class="forest-row">
+      🌸 🌸 🍄
+    </div>
+    `;
+  }
+
+  if(level >= 8){
+    world += `
+    <div class="forest-row">
+      🌲 🌳 🌲
+    </div>
+    `;
+  }
+
+  if(level >= 12){
+    world += `
+    <div class="forest-row">
+      🦋
+    </div>
+    `;
+  }
+
+  if(level >= 18){
+    world += `
+    <div class="forest-row">
+      🐇
+    </div>
+    `;
+  }
+
+  if(level >= 25){
+    world += `
+    <div class="forest-row">
+      🦌
+    </div>
+    `;
+  }
+
+  if(level >= 35){
+    world += `
+    <div class="forest-row">
+      🌊 🌊 🌊
+    </div>
+    `;
+  }
+
+  if(level >= 45){
+    world += `
+    <div class="forest-row">
+      🦊
+    </div>
+    `;
+  }
+
+  if(level >= 60){
+    world += `
+    <div class="forest-row">
+      ⛰️ ⛰️
+    </div>
+    `;
+  }
+
+  container.innerHTML = world;
+
 }
 
 function renderAll() {
