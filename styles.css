@@ -820,3 +820,16 @@ box-shadow:
     transition-duration: 0.01ms !important;
   }
 }
+
+
+@keyframes flow{
+
+0%{
+background-position:0%;
+}
+
+100%{
+background-position:300%;
+}
+
+}
